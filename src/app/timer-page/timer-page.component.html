@@ -3,18 +3,31 @@
 
 <button mat-raised-button color="primary" (click)="addTimer()">Add</button>
 
+<button mat-raised-button color="primary" (click)="playAudio()">playAudio</button>
 
 <div *ngFor="let timer of timers">
     <input matInput type="text" [(ngModel)]="timer.name">
-    <div>{{timer.status}}</div>
+    <div>{{timer.state.toString()}}</div>
     <input matInput type="number" [(ngModel)]="timer.counter">
-    <div>{{timer.currentCounter10 / 10}}</div>
+    <div [class]="isTimerPaused(timer.state)?'blink':''">{{timer.currentCounter10 / 10}}</div>
 
-    <button mat-raised-button color="primary" (click)="startTimer(timer)">start</button>
-    <button mat-raised-button color="primary" (click)="pauseTimer(timer)">pause</button>
-    <button mat-raised-button color="primary" (click)="resumeTimer(timer)">resume</button>
-    <button mat-raised-button color="primary" (click)="resetTimer(timer)">reset</button>
 
+
+    <!-- <button mat-raised-button color="primary" *ngIf="timer.state"
+        (click)="timer.start()">start</button>-->
+
+    <div *ngIf="isTimerCounting(timer.state); then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <button mat-mini-fab aria-label="pause button" color="primary" (click)="timer.pause()">
+            <mat-icon>pause</mat-icon>
+        </button>
+    </ng-template>
+    <ng-template #elseBlock>
+        <button mat-mini-fab aria-label="start button" color="primary" (click)="timer.resume()">
+            <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="timer.reset()">reset</button>
+    </ng-template>
 
     <button mat-raised-button color="primary" (click)="deleteTimer()">Delete</button>
 </div>
