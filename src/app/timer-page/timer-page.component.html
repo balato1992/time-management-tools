@@ -1,0 +1,20 @@
+<p>timer-page works!</p>
+
+
+<button mat-raised-button color="primary" (click)="addTimer()">Add</button>
+
+
+<div *ngFor="let timer of timers">
+    <input matInput type="text" [(ngModel)]="timer.name">
+    <div>{{timer.status}}</div>
+    <input matInput type="number" [(ngModel)]="timer.counter">
+    <div>{{timer.currentCounter10 / 10}}</div>
+
+    <button mat-raised-button color="primary" (click)="startTimer(timer)">start</button>
+    <button mat-raised-button color="primary" (click)="pauseTimer(timer)">pause</button>
+    <button mat-raised-button color="primary" (click)="resumeTimer(timer)">resume</button>
+    <button mat-raised-button color="primary" (click)="resetTimer(timer)">reset</button>
+
+
+    <button mat-raised-button color="primary" (click)="deleteTimer()">Delete</button>
+</div>
