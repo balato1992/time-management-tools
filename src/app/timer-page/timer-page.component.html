@@ -3,31 +3,33 @@
 
 <button mat-raised-button color="primary" (click)="addTimer()">Add</button>
 
-<button mat-raised-button color="primary" (click)="playAudio()">playAudio</button>
+<button mat-raised-button color="primary" (click)="playAudio()">Test sound</button>
 
 <div *ngFor="let timer of timers">
     <input matInput type="text" [(ngModel)]="timer.name">
     <div>{{timer.state.toString()}}</div>
-    <input matInput type="number" [(ngModel)]="timer.counter">
-    <div [class]="isTimerPaused(timer.state)?'blink':''">{{timer.currentCounter10 / 10}}</div>
+    <input matInput type="number" [(ngModel)]="timer.timeInSecond">
+    <div [class]="flashText(timer.state)?'blink':''">{{timer.remainingTimeX10/10}}</div>
 
 
 
     <!-- <button mat-raised-button color="primary" *ngIf="timer.state"
         (click)="timer.start()">start</button>-->
 
-    <div *ngIf="isTimerCounting(timer.state); then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-        <button mat-mini-fab aria-label="pause button" color="primary" (click)="timer.pause()">
-            <mat-icon>pause</mat-icon>
-        </button>
-    </ng-template>
-    <ng-template #elseBlock>
-        <button mat-mini-fab aria-label="start button" color="primary" (click)="timer.resume()">
-            <mat-icon>play_arrow</mat-icon>
-        </button>
-        <button mat-raised-button color="primary" (click)="timer.reset()">reset</button>
-    </ng-template>
+    <button *ngIf="showPlay(timer.state)" mat-mini-fab aria-label="start button" color="primary"
+        (click)="timer.resume()">
+        <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button *ngIf="showPause(timer.state)" mat-mini-fab aria-label="pause button" color="primary"
+        (click)="timer.pause()">
+        <mat-icon>pause</mat-icon>
+    </button>
+    <button *ngIf="showStop(timer.state)" mat-mini-fab aria-label="reset button" color="primary"
+        (click)="timer.reset()">
+        <mat-icon>stop</mat-icon>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="timer.add()">add</button>
 
     <button mat-raised-button color="primary" (click)="deleteTimer()">Delete</button>
 </div>

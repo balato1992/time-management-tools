@@ -1,92 +1,118 @@
-import { interval, merge, Subject, Subscription, NEVER } from 'rxjs';
-import { map, mapTo, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { merge, Subject, Subscription, NEVER } from 'rxjs';
+import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 
 
 export enum TimerState {
     Unknown = "Unknown",
     Ready = "Ready",
     Counting = "Counting",
-    Paused = "Paused"
+    Paused = "Paused",
+    TimesUp = "TimesUp"
 }
 
 interface TimerData {
     counting?: boolean;
     reset?: boolean;
-    resetValue?: number;
+    timesUp?: boolean;
+    timeOfIncrement?: number;
 }
 
 export class Timer {
     name: string;
     state: TimerState;
-    _counter: number;
-    get counter(): number {
-        return this._counter;
+    _timeInSecond: number;
+    get timeInSecond(): number {
+        return this._timeInSecond;
     }
-    set counter(value: number) {
-        this._counter = value;
-        this.reset$.next(this._counter);
+    set timeInSecond(value: number) {
+        this._timeInSecond = value;
+        this.reset$.next(this._timeInSecond);
     }
-    currentCounter10: number;
+    remainingTimeX10: number;
+    ;
 
-    private readonly start$: Subject<number>;
-    private readonly resume$: Subject<number>;
+    private readonly resume$: Subject<void>;
     private readonly reset$: Subject<number>;
-    private readonly pause$: Subject<number>;
+    private readonly pause$: Subject<void>;
+    private readonly increase$: Subject<void>;
     subscription: Subscription | undefined;
+
+
+    private readonly timesup$: Subject<void>;
 
     constructor() {
         this.name = "";
         this.state = TimerState.Unknown;
-        this._counter = 0;
-        this.currentCounter10 = 0;
+        this._timeInSecond = 0;
+        this.remainingTimeX10 = 0;
 
-        this.start$ = new Subject();
         this.resume$ = new Subject();
         this.reset$ = new Subject();
         this.pause$ = new Subject();
+        this.increase$ = new Subject();
+        this.timesup$ = new Subject();
     }
 
-    private _resetCurrentCounter(_this: Timer, { reset, resetValue }: TimerData) {
-        if (reset && resetValue !== undefined) {
-            _this.currentCounter10 = resetValue * 10;
-        }
-    }
-    private _changeState(_this: Timer, { counting, reset }: TimerData) {
-        if (counting !== undefined && reset !== undefined) {
-            _this.state = counting ? TimerState.Counting : reset ? TimerState.Ready : TimerState.Paused
-        }
-    }
+    subscribe() {
 
-    subscribe(finished: Function) {
+        let _this = this;
+        let flag = false;
+
         this.subscription = merge(
-            this.start$.pipe(mapTo({ counting: true, reset: true })),
-            this.resume$.pipe(mapTo({ counting: true, reset: false })),
-            this.reset$.pipe(map(c => ({ counting: false, reset: true, resetValue: c }))),
-            this.pause$.pipe(mapTo({ counting: false, reset: false })),
+            this.resume$.pipe(map(c => ({ counting: true }))),
+            this.pause$.pipe(map(c => ({ counting: false }))),
+            this.reset$.pipe(map(c => ({ counting: false, reset: true }))),
+            this.increase$.pipe(map(c => ({ timeOfIncrement: 1000 }))),
+            this.timesup$.pipe(map(c => ({ timesUp: true }))),
         ).pipe(
-            //startWith({ counting: false, reset: true }),
-            tap(o => this._resetCurrentCounter(this, o)),
-            tap(o => this._changeState(this, o)),
-            switchMap(({ counting }: TimerData) => (counting ? interval(100) : NEVER)
-                .pipe(
-                    map(_ => this.currentCounter10 - 1),
-                    takeWhile(n => n >= 0),
-                    tap(n => this.currentCounter10 = n)
-                ))
-        ).subscribe();
+            tap(({ reset }: TimerData) =>
+                reset && (this.remainingTimeX10 = this.timeInSecond * 10)),
+            tap(({ counting, reset }: TimerData) =>
+                this.state = counting ? TimerState.Counting : reset ? TimerState.Ready : TimerState.Paused),
+            tap(({ timesUp }: TimerData) =>
+                this.state = timesUp ? TimerState.TimesUp : this.state),
+            tap(({ timeOfIncrement }: TimerData) =>
+                timeOfIncrement !== undefined && (this.remainingTimeX10 += timeOfIncrement)),
+            tap(({ counting }: TimerData) =>
+                counting && (flag = false)),
 
+            switchMap(({ counting }) => (counting ? timer(0, 100) : NEVER)
+                .pipe(
+                    map(n => this.remainingTimeX10 - (n !== 0 ? 1 : 0)),
+                    takeWhile(n => n >= 0 || (n < 0 && !flag)),
+                )),
+        ).subscribe({
+            next(n) {
+                _this.remainingTimeX10 = (n >= 0) ? n : 0;
+
+                if (_this.remainingTimeX10 == 0) {
+                    flag = true;
+
+                    _this.pause$.next();
+                    _this.timesup$.next();
+                }
+            },
+            error(err) { console.error('something wrong occurred: ' + err); },
+            complete() { console.log('done'); }
+        });
     }
-    start() {
-        this.start$.next();
+
+    getTimesup() {
+        return this.timesup$.pipe();
     }
+
     resume() {
         this.resume$.next();
     }
     reset() {
-        this.reset$.next(this._counter);
+        this.reset$.next(this._timeInSecond);
     }
     pause() {
         this.pause$.next();
+    }
+    add() {
+        this.increase$.next();
     }
 }
 

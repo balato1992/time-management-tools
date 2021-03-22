@@ -19,16 +19,24 @@ export class TimerPageComponent implements OnInit {
 
   addTimer() {
     let timer = new Timer();
-    timer.subscribe(() => this.playAudio());
+    timer.subscribe();
+    timer.getTimesup().subscribe(o => this.playAudio());
 
     this.timers.push(timer);
   }
 
-  isTimerCounting(state: TimerState) {
+
+  flashText(state: TimerState) {
+    return state == TimerState.Paused || state == TimerState.TimesUp;
+  }
+  showPlay(state: TimerState) {
+    return state == TimerState.Ready || state == TimerState.Paused;
+  }
+  showPause(state: TimerState) {
     return state == TimerState.Counting;
   }
-  isTimerPaused(state: TimerState) {
-    return state == TimerState.Paused;
+  showStop(state: TimerState) {
+    return state == TimerState.Paused || state == TimerState.TimesUp;
   }
 
   deleteTimer() {
@@ -43,6 +51,6 @@ export class TimerPageComponent implements OnInit {
     setTimeout(() => {
       audio.pause();
       audio.currentTime = 0;
-    }, 500);
+    }, 800);
   }
 }
