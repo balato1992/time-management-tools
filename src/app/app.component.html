@@ -1,20 +1,31 @@
-<!-- Toolbar -->
-<mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
+<div style="display: flex; flex-direction: column; height: 100vh;">
 
-  <button mat-flat-button color="primary" aria-label="Example icon-button with share icon" [routerLink]="'/'">
-    Main
-  </button>
-  <button mat-flat-button color="primary" aria-label="Example icon-button with share icon" [routerLink]="'/timer'">
-    Timer
-  </button>
-  <span class="spacer"></span>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
 
-  <span>Sound from <a href="https://www.zapsplat.com">Zapsplat.com</a></span>
-</mat-toolbar>
+    <button mat-flat-button color="primary" aria-label="Example icon-button with share icon" [routerLink]="'/'">
+      Main
+    </button>
+    <button mat-flat-button color="primary" aria-label="Example icon-button with share icon" [routerLink]="'/timer'">
+      Timer
+    </button>
+    <span class="spacer"></span>
 
+    <span>Sound from <a href="https://www.zapsplat.com">Zapsplat.com</a></span>
+  </mat-toolbar>
 
-<router-outlet></router-outlet>
+  <div style="flex: 1; overflow-y: auto; display: flex; flex-direction: column;">
+    <div style="flex: 1 1 auto;">
+      <router-outlet></router-outlet>
+    </div>
+    <div style="background-color: blueviolet;">
+      <div style="margin: 22px auto; text-align: center;">
+        
+        © Copyright 2019. All Rights Reserved.
+      </div>
+    </div>
+  </div>
+</div>
