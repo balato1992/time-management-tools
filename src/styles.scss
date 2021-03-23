@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+// default theme:
+$primary     : mat-palette($mat-blue, 800);
+$primary-text: white;
+$accent      : mat-palette($mat-teal);
+$theme       : mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+$dark-p: mat-palette($mat-blue-grey, 500);
+$dark-a: mat-palette($mat-blue-grey, 900);
+$dark-t: mat-dark-theme($dark-p, $dark-a);
+
+.darkTheme {
+    @include angular-material-theme($dark-t);
+}
+
+.custom-primary {
+    background-color: mat-color($primary);
+    color           : $primary-text;
+
+    a,
+    a:active,
+    a:hover,
+    a:visited {
+        color: $primary-text;
+    }
+}
+
+// general:
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin     : 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.vertical-flex {
+    display       : flex;
+    flex-direction: column;
+}

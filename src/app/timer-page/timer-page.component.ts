@@ -5,7 +5,7 @@ import { Timer, TimerState } from '../class/timer';
 @Component({
   selector: 'app-timer-page',
   templateUrl: './timer-page.component.html',
-  styleUrls: ['./timer-page.component.css']
+  styleUrls: ['./timer-page.component.scss']
 })
 export class TimerPageComponent implements OnInit {
 

@@ -1,4 +1,4 @@
-<div style="display: flex; flex-direction: column; height: 100vh;">
+<div class="vertical-flex" style="height: 100vh;">
 
   <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
@@ -14,17 +14,22 @@
     </button>
     <span class="spacer"></span>
 
-    <span>Sound from <a href="https://www.zapsplat.com">Zapsplat.com</a></span>
   </mat-toolbar>
 
-  <div style="flex: 1; overflow-y: auto; display: flex; flex-direction: column;">
+  <div class="vertical-flex" style="flex: 1; overflow-y: auto;">
     <div style="flex: 1 1 auto;">
       <router-outlet></router-outlet>
     </div>
-    <div style="background-color: blueviolet;">
-      <div style="margin: 22px auto; text-align: center;">
-        
-        © Copyright 2019. All Rights Reserved.
+    <div class="custom-primary">
+      <div class="vertical-flex" style="margin: 22px auto; text-align: center;">
+
+        <div>
+          Copyright © 2019 Hong cheng-wei All rights reserved.
+        </div>
+        <div>
+
+          <span>Alarm sound from <a href="https://www.zapsplat.com">Zapsplat.com</a></span>
+        </div>
       </div>
     </div>
   </div>
