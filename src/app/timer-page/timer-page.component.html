@@ -2,7 +2,9 @@
     <button mat-raised-button color="primary" (click)="addTimer()">Add</button>
     <button mat-raised-button color="primary" (click)="playAudio()">Test sound</button>
 
-    <div *ngFor="let timer of timers">
-        <app-timer [timer]="timer"></app-timer>
-    </div>
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab *ngFor="let timer of timers" [label]="timer.name">
+            <app-timer [timer]="timer"></app-timer>
+        </mat-tab>
+    </mat-tab-group>
 </mat-card>

@@ -1,12 +1,9 @@
+<app-timer-spinner width="300px" height="300px" [percentage]="timer.remainingTimeX10/10/timer.timeInSecond"></app-timer-spinner>
+
 <input matInput type="text" [(ngModel)]="timer.name">
 <div>{{timer.state.toString()}}</div>
 <input matInput type="number" [(ngModel)]="timer.timeInSecond">
 <div [class]="flashText(timer.state)?'blink':''">{{timer.remainingTimeX10/10}}</div>
-
-
-
-<!-- <button mat-raised-button color="primary" *ngIf="timer.state"
-        (click)="timer.start()">start</button>-->
 
 <button *ngIf="showPlay(timer.state)" mat-mini-fab aria-label="start button" color="primary" (click)="timer.resume()">
     <mat-icon>play_arrow</mat-icon>
