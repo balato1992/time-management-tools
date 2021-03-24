@@ -4,8 +4,7 @@ import { Timer, TimerState } from '../class/timer';
 
 @Component({
   selector: 'app-timer-page',
-  templateUrl: './timer-page.component.html',
-  styleUrls: ['./timer-page.component.scss']
+  templateUrl: './timer-page.component.html'
 })
 export class TimerPageComponent implements OnInit {
 
@@ -23,23 +22,6 @@ export class TimerPageComponent implements OnInit {
     timer.getTimesup().subscribe(o => this.playAudio());
 
     this.timers.push(timer);
-  }
-
-
-  flashText(state: TimerState) {
-    return state == TimerState.Paused || state == TimerState.TimesUp;
-  }
-  showPlay(state: TimerState) {
-    return state == TimerState.Ready || state == TimerState.Paused;
-  }
-  showPause(state: TimerState) {
-    return state == TimerState.Counting;
-  }
-  showStop(state: TimerState) {
-    return state == TimerState.Paused || state == TimerState.TimesUp;
-  }
-
-  deleteTimer() {
   }
 
   playAudio() {

@@ -1,0 +1,23 @@
+<input matInput type="text" [(ngModel)]="timer.name">
+<div>{{timer.state.toString()}}</div>
+<input matInput type="number" [(ngModel)]="timer.timeInSecond">
+<div [class]="flashText(timer.state)?'blink':''">{{timer.remainingTimeX10/10}}</div>
+
+
+
+<!-- <button mat-raised-button color="primary" *ngIf="timer.state"
+        (click)="timer.start()">start</button>-->
+
+<button *ngIf="showPlay(timer.state)" mat-mini-fab aria-label="start button" color="primary" (click)="timer.resume()">
+    <mat-icon>play_arrow</mat-icon>
+</button>
+<button *ngIf="showPause(timer.state)" mat-mini-fab aria-label="pause button" color="primary" (click)="timer.pause()">
+    <mat-icon>pause</mat-icon>
+</button>
+<button *ngIf="showStop(timer.state)" mat-mini-fab aria-label="reset button" color="primary" (click)="timer.reset()">
+    <mat-icon>stop</mat-icon>
+</button>
+
+<button mat-raised-button color="primary" (click)="timer.add()">add</button>
+
+<button mat-raised-button color="primary" (click)="deleteTimer()">Delete</button>

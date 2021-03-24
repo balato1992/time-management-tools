@@ -23,9 +23,10 @@
 # CHANGE LOG
 
 - 20210324
-  1. change project name
-  2. modify style
-  3. change Copyright
+  1. create timer component
+  2. change project name
+  3. modify style
+  4. change Copyright
 - 20210323 adjust timer and add time's up sound
   1. adjust timer
   2. add time's up sound
