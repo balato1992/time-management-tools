@@ -1,19 +1,31 @@
 
 # TODO
 
-- improve timer
-- improve timer style
-- timer sound last until click stop button
-  - or other mechanism
+- timer
+  - improve style
+  - change sound
+  - sound last until click stop button or other mechanism
 
 - add instructions
 - timer series
+- style dark mode
+- language
+
 - add test
 
 # DONE
 
+- timer
+  - play
+  - pause
+  - reset
+
 # CHANGE LOG
 
+- 20210324
+  1. change project name
+  2. modify style
+  3. change Copyright
 - 20210323 adjust timer and add time's up sound
   1. adjust timer
   2. add time's up sound
