@@ -29,6 +29,7 @@
   3. modify style
   4. change Copyright
   5. add timer-spinner
+  6. change remainingTime10 to remainingTimeInUnit
 - 20210323 adjust timer and add time's up sound
   1. adjust timer
   2. add time's up sound

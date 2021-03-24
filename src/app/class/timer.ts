@@ -19,6 +19,8 @@ interface TimerData {
 }
 
 export class Timer {
+    readonly unitOfOneTick = 20;
+
     name: string;
     state: TimerState;
     _timeInSecond: number;
@@ -29,8 +31,11 @@ export class Timer {
         this._timeInSecond = value;
         this.reset$.next(this._timeInSecond);
     }
-    remainingTimeX10: number;
-    ;
+
+    _remainingTimeInUnit: number;
+    get remainingTime(): number {
+        return this._remainingTimeInUnit * this.unitOfOneTick / 1000;
+    }
 
     private readonly resume$: Subject<void>;
     private readonly reset$: Subject<number>;
@@ -45,7 +50,7 @@ export class Timer {
         this.name = "";
         this.state = TimerState.Unknown;
         this._timeInSecond = 0;
-        this.remainingTimeX10 = 0;
+        this._remainingTimeInUnit = 0;
 
         this.resume$ = new Subject();
         this.reset$ = new Subject();
@@ -55,6 +60,7 @@ export class Timer {
     }
 
     subscribe() {
+        const unitOfAdd = 1000 / this.unitOfOneTick;
 
         let _this = this;
         let flag = false;
@@ -63,30 +69,30 @@ export class Timer {
             this.resume$.pipe(map(c => ({ counting: true }))),
             this.pause$.pipe(map(c => ({ counting: false }))),
             this.reset$.pipe(map(c => ({ counting: false, reset: true }))),
-            this.increase$.pipe(map(c => ({ timeOfIncrement: 1000 }))),
+            this.increase$.pipe(map(c => ({ timeOfIncrement: unitOfAdd }))),
             this.timesup$.pipe(map(c => ({ timesUp: true }))),
         ).pipe(
             tap(({ reset }: TimerData) =>
-                reset && (this.remainingTimeX10 = this.timeInSecond * 10)),
+                reset && (this._remainingTimeInUnit = this.timeInSecond * 1000 / this.unitOfOneTick)),
             tap(({ counting, reset }: TimerData) =>
                 this.state = counting ? TimerState.Counting : reset ? TimerState.Ready : TimerState.Paused),
             tap(({ timesUp }: TimerData) =>
                 this.state = timesUp ? TimerState.TimesUp : this.state),
             tap(({ timeOfIncrement }: TimerData) =>
-                timeOfIncrement !== undefined && (this.remainingTimeX10 += timeOfIncrement)),
+                timeOfIncrement !== undefined && (this._remainingTimeInUnit += timeOfIncrement)),
             tap(({ counting }: TimerData) =>
                 counting && (flag = false)),
 
-            switchMap(({ counting }) => (counting ? timer(0, 100) : NEVER)
+            switchMap(({ counting }) => (counting ? timer(0, this.unitOfOneTick) : NEVER)
                 .pipe(
-                    map(n => this.remainingTimeX10 - (n !== 0 ? 1 : 0)),
+                    map(n => this._remainingTimeInUnit - (n !== 0 ? 1 : 0)),
                     takeWhile(n => n >= 0 || (n < 0 && !flag)),
                 )),
         ).subscribe({
             next(n) {
-                _this.remainingTimeX10 = (n >= 0) ? n : 0;
+                _this._remainingTimeInUnit = (n >= 0) ? n : 0;
 
-                if (_this.remainingTimeX10 == 0) {
+                if (_this._remainingTimeInUnit == 0) {
                     flag = true;
 
                     _this.pause$.next();
