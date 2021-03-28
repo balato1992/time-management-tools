@@ -12,10 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { TimerPageComponent } from './timer-page/timer-page.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { TimerComponent } from './timer/timer.component';
-import { TimerSpinnerComponent } from './timer-spinner/timer-spinner.component';
+import { TimerPageComponent } from './components/timer-page/timer-page.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { TimerComponent } from './components/timer/timer.component';
+import { TimerSpinnerComponent } from './components/timer-spinner/timer-spinner.component';
 
 @NgModule({
   declarations: [

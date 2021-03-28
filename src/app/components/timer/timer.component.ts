@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Timer, TimerState } from '../class/timer';
+import { Timer, TimerState } from '../../class/timer';
 
 @Component({
   selector: 'app-timer',

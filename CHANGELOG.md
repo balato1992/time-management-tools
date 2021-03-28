@@ -32,6 +32,7 @@
 - 20210329
   1. put remaining time in spinner
   2. format remaining time and add unit test
+  3. move file location
 - 20210324
   1. create timer component
   2. change project name
