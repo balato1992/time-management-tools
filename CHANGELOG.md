@@ -22,11 +22,16 @@
   - play
   - pause
   - reset
+  - UI
+    - spinner
+    - format remaining time
+    - flashing remaining time when time paused
 
 # CHANGE LOG
 
 - 20210329
   1. put remaining time in spinner
+  2. format remaining time and add unit test
 - 20210324
   1. create timer component
   2. change project name

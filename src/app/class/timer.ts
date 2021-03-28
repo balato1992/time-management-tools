@@ -2,6 +2,8 @@ import { timer } from 'rxjs';
 import { merge, Subject, Subscription, NEVER } from 'rxjs';
 import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 
+import { GeneralMethodsService as gms } from '../services/general-methods.service';
+
 
 export enum TimerState {
     Unknown = "Unknown",
@@ -37,9 +39,7 @@ export class Timer {
         return this._remainingTimeInUnit * this.unitOfOneTick / 1000;
     }
     get strRemainingTime(): string {
-        let str = Math.ceil(this.remainingTimeInSecond).toFixed(0);
-
-        return str;
+        return gms.formatTimerText(this.remainingTimeInSecond);
     }
     get percentage(): number {
         return this.remainingTimeInSecond / this.timeInSecond;
