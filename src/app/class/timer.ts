@@ -33,8 +33,16 @@ export class Timer {
     }
 
     _remainingTimeInUnit: number;
-    get remainingTime(): number {
+    get remainingTimeInSecond(): number {
         return this._remainingTimeInUnit * this.unitOfOneTick / 1000;
+    }
+    get strRemainingTime(): string {
+        let str = Math.ceil(this.remainingTimeInSecond).toFixed(0);
+
+        return str;
+    }
+    get percentage(): number {
+        return this.remainingTimeInSecond / this.timeInSecond;
     }
 
     private readonly resume$: Subject<void>;

@@ -2,4 +2,5 @@
 <svg [attr.width]="width" [attr.height]="height" viewBox="0 0 100 100">
     <ellipse cx="50%" cy="50%" rx="45%" ry="45%" style="fill:blue" />
     <path fill="none" stroke="purple" stroke-width="5" [attr.d]="drawn" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" [class]="flashText ? 'blink' : ''">{{text}}</text>
 </svg>

@@ -6,6 +6,8 @@
   - change sound
   - sound last until click stop button or other mechanism
   - improve spinner
+  - update period
+  - percentage after add time
 
 - add instructions
 - timer series
@@ -23,6 +25,8 @@
 
 # CHANGE LOG
 
+- 20210329
+  1. put remaining time in spinner
 - 20210324
   1. create timer component
   2. change project name

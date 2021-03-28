@@ -4,12 +4,15 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-timer-spinner',
-  templateUrl: './timer-spinner.component.html'
+  templateUrl: './timer-spinner.component.html',
+  styleUrls: ['./timer-spinner.component.scss']
 })
 export class TimerSpinnerComponent implements OnInit {
 
   @Input() width: string;
   @Input() height: string;
+  @Input() text: string;
+  @Input() flashText: boolean;
   @Input() percentage: number;
   drawn: string;
 

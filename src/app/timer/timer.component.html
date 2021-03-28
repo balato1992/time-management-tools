@@ -1,9 +1,12 @@
-<app-timer-spinner width="300px" height="300px" [percentage]="timer.remainingTime/timer.timeInSecond"></app-timer-spinner>
+<div>
+    <app-timer-spinner width="300px" height="300px" [text]="timer.strRemainingTime" [flashText]="flashText(timer.state)"
+        [percentage]="timer.percentage">
+    </app-timer-spinner>
+</div>
 
 <input matInput type="text" [(ngModel)]="timer.name">
 <div>{{timer.state.toString()}}</div>
 <input matInput type="number" [(ngModel)]="timer.timeInSecond">
-<div [class]="flashText(timer.state)?'blink':''">{{timer.remainingTime}}</div>
 
 <button *ngIf="showPlay(timer.state)" mat-mini-fab aria-label="start button" color="primary" (click)="timer.resume()">
     <mat-icon>play_arrow</mat-icon>
