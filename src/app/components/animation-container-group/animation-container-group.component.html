@@ -1,0 +1,9 @@
+<div>
+    <div>
+        <button *ngFor="let tabItem of tabItems" (click)="showItem(tabItem)">ACG</button>
+    </div>
+
+    <div class="group-div">
+        <ng-content></ng-content>
+    </div>
+</div>

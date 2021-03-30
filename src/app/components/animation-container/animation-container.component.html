@@ -1,0 +1,4 @@
+<div [@transformDiv]="getAnimationState()" (@transformDiv.start)="onAnimationEvent($event)"
+    (@transformDiv.done)="onAnimationEvent($event)">
+    <ng-content *ngIf="isShowContent()"></ng-content>
+</div>

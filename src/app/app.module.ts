@@ -11,11 +11,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 import { TimerPageComponent } from './components/timer-page/timer-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { TimerSpinnerComponent } from './components/timer-spinner/timer-spinner.component';
+import { TimerAddComponent } from './components/timer-add/timer-add.component';
+import { AnimationContainerComponent } from './components/animation-container/animation-container.component';
+import { AnimationContainerGroupComponent } from './components/animation-container-group/animation-container-group.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { TimerSpinnerComponent } from './components/timer-spinner/timer-spinner.
     TimerPageComponent,
     MainPageComponent,
     TimerComponent,
-    TimerSpinnerComponent
+    TimerSpinnerComponent,
+    TimerAddComponent,
+    AnimationContainerComponent,
+    AnimationContainerGroupComponent
   ],
   imports: [
     FormsModule,
@@ -35,6 +42,7 @@ import { TimerSpinnerComponent } from './components/timer-spinner/timer-spinner.
     MatIconModule,
     MatCardModule,
     MatTabsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

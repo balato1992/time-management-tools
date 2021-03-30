@@ -2,9 +2,21 @@
     <button mat-raised-button color="primary" (click)="addTimer()">Add</button>
     <button mat-raised-button color="primary" (click)="playAudio()">Test sound</button>
 
+
+
+
     <mat-tab-group mat-align-tabs="start">
         <mat-tab *ngFor="let timer of timers" [label]="timer.name">
             <app-timer [timer]="timer"></app-timer>
         </mat-tab>
     </mat-tab-group>
 </mat-card>
+
+<!--
+<app-animation-container-group>
+    <app-animation-container *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,]">
+        --{{i}}
+        <app-timer-add></app-timer-add>
+    </app-animation-container>
+</app-animation-container-group>
+-->

@@ -1,0 +1,26 @@
+
+<div>
+    <ng-container *ngFor="let time of times">
+        <!-- {{time.name}} -->
+        <mat-form-field class="mat-select-content">
+            <mat-select [(value)]="time.value">
+                <mat-option *ngFor="let num of nums" [value]="num">
+                    {{num}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <ng-container *ngIf="time.name !== 'second'">
+            :
+        </ng-container>
+    </ng-container>
+</div>
+
+<div>
+    <ng-container *ngFor="let time of times">
+        {{time.value}}
+        <ng-container *ngIf="time.name !== 'second'">
+            :
+        </ng-container>
+    </ng-container>
+</div>

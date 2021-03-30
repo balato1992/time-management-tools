@@ -1,0 +1,10 @@
+:host {
+    min-width: 100%;
+}
+
+.group-div {
+    position  : relative;
+    overflow  : hidden;
+    display   : flex;
+    transition: height 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}

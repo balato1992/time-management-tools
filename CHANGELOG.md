@@ -8,6 +8,7 @@
   - improve spinner
   - update period
   - percentage after add time
+  - figure out how tab css work
 
 - add instructions
 - timer series
@@ -29,6 +30,9 @@
 
 # CHANGE LOG
 
+- 20210330
+  1. add animation-container component, animation-container-group component
+  2. add timer-add component
 - 20210329
   1. put remaining time in spinner
   2. format remaining time and add unit test
