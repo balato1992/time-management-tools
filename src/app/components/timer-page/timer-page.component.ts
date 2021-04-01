@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Timer, TimerState } from '../../class/timer';
+import { AnimationContainerGroupComponent } from '../animation-container-group/animation-container-group.component';
+import { AnimationContainerComponent } from '../animation-container/animation-container.component';
+import { Timer } from '../../class/timer';
 
 @Component({
   selector: 'app-timer-page',
   templateUrl: './timer-page.component.html'
 })
 export class TimerPageComponent implements OnInit {
+
+  @ViewChild('containerGroup') containerGroup: AnimationContainerGroupComponent;
+  @ViewChild('timerAddingContainer') timerAddingContainer: AnimationContainerComponent;
+  @ViewChild('timersContainer') timersContainer: AnimationContainerComponent;
 
   timers: Timer[] = [];
   tmpcount: number = 0;
@@ -16,7 +22,22 @@ export class TimerPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addTimer() {
+  showCancel() {
+    return this.containerGroup?.currentTabItem === this.timerAddingContainer
+      && this.timers.length > 0;
+  }
+  showAdd() {
+    return this.containerGroup?.currentTabItem !== this.timerAddingContainer;
+  }
+
+  switchToTimerAdding() {
+    this.containerGroup.switchTo(this.timerAddingContainer);
+  }
+  switchToTimers() {
+    this.containerGroup.switchTo(this.timersContainer);
+  }
+
+  addTimer2() {
     let timer = new Timer();
     timer.subscribe();
     timer.getTimesup().subscribe(o => this.playAudio());

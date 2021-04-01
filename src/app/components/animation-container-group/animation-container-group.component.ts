@@ -11,7 +11,7 @@ export class AnimationContainerGroupComponent implements OnInit {
 
   @ContentChildren(AnimationContainerComponent) tabItems: QueryList<AnimationContainerComponent>;
 
-  currentTabItem: AnimationContainerComponent;
+  currentTabItem: AnimationContainerComponent | undefined;
 
   constructor() { }
 
@@ -19,10 +19,13 @@ export class AnimationContainerGroupComponent implements OnInit {
   }
 
   ngAfterContentInit() {
-    console.log(this.tabItems.length);
+
+    if (this.tabItems.length > 0) {
+      this.switchTo(this.tabItems.get(0));
+    }
   }
 
-  showItem(tabItem: AnimationContainerComponent) {
+  switchTo(tabItem: AnimationContainerComponent | undefined) {
 
     let arrTabItems = this.tabItems.toArray();
 
@@ -34,7 +37,12 @@ export class AnimationContainerGroupComponent implements OnInit {
 
       let isShow = (t === lastTabItem || t === tabItem);
 
-      t.setVisible(i - index, isShow);
+      if (index >= 0) {
+        t.setVisible(i - index, isShow);
+      }
+      else {
+        t.setVisible(-1, isShow);
+      }
     });
 
   }

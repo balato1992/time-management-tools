@@ -30,9 +30,12 @@
 
 # CHANGE LOG
 
+- 20210401
+  1. refine some code and style
 - 20210330
-  1. add animation-container component, animation-container-group component
-  2. add timer-add component
+  1. add animation-container component
+  2. add animation-container-group component
+  3. add timer-add component
 - 20210329
   1. put remaining time in spinner
   2. format remaining time and add unit test

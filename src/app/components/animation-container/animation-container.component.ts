@@ -19,7 +19,7 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
         //transition: 'all 3s ease-in'
       })),
       transition('* <=> *', [
-        animate('1s')
+        animate('.5s')
       ]),
     ])
   ]
