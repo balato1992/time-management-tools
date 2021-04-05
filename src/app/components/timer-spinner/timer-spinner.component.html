@@ -1,7 +1,8 @@
 <svg [attr.width]="width" [attr.height]="height" [attr.viewBox]="'0 0 '+size+' '+size">
     <ellipse cx="50%" cy="50%" rx="45%" ry="45%" style="fill: transparent;" />
-    <path fill="none" stroke="black" [attr.stroke-width]="size/50" [attr.d]="pathDrawn" />
-    <circle [attr.cx]="pathCX" [attr.cy]="pathCY" [attr.r]="size/24" />
+    <path fill="none" stroke="black" [attr.stroke-width]="size/80" [attr.d]="pathSecondary" />
+    <path fill="none" class="primary" [attr.stroke-width]="size/80" [attr.d]="pathPrimary" />
+    <circle [attr.cx]="pathCX" [attr.cy]="pathCY" [attr.r]="size/36" />
     <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" [attr.font-size]="size/8+'px'"
         [class]="flashText ? 'blink' : ''">{{text}}</text>
 </svg>

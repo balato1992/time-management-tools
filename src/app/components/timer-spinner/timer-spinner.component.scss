@@ -14,3 +14,6 @@
 circle {
   fill: mat-color($primary);
 }
+path.primary {
+  stroke: mat-color($primary);
+}

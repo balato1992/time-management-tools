@@ -16,7 +16,8 @@ export class TimerSpinnerComponent implements OnInit {
   @Input() percentage: number = 1;
 
   size: number = 400;
-  pathDrawn: string;
+  pathPrimary: string;
+  pathSecondary: string;
   pathCX: number;
   pathCY: number;
 
@@ -32,7 +33,7 @@ export class TimerSpinnerComponent implements OnInit {
       if (Number.isNaN(value)) {
         value = 0;
       }
-      this.drawArc(value * 360);
+      this.draw(value * 360);
     }
   }
 
@@ -54,8 +55,34 @@ export class TimerSpinnerComponent implements OnInit {
 
     return angle;
   }
+  getArcPath(
+    start: { x: number, y: number },
+    end: { x: number, y: number },
+    p180: { x: number, y: number },
+    radius: number,
+    endAngle: number,
+    clockwise: boolean) {
 
-  drawArc(endAngle: number = 360) {
+    let sweepFlag = clockwise ? 1 : 0;
+
+    // 20210406, use this to avoid point being too close to show correctly
+    let angleMoreThan180: Array<any> = [];
+    if (endAngle > 180 === clockwise) {
+      angleMoreThan180 = [
+        "A", radius, radius, 0, 0, sweepFlag, p180.x, p180.y,
+      ];
+    }
+
+    let drawn = [
+      "M", start.x, start.y,
+      ...angleMoreThan180,
+      "A", radius, radius, 0, 0, sweepFlag, end.x, end.y,
+    ];
+
+    return drawn.join(" ");
+  }
+
+  draw(endAngle: number = 360) {
     endAngle = this.normalizeAngle(endAngle);
 
     const center = { x: this.size / 2, y: this.size / 2 };
@@ -64,22 +91,10 @@ export class TimerSpinnerComponent implements OnInit {
 
     let start = this.getArcPosition(center, radius, startAngle);
     let end = this.getArcPosition(center, radius, endAngle);
+    let p180 = this.getArcPosition(center, radius, startAngle + 180);
 
-    let angleMoreThan180: Array<any> = [];
-    if (endAngle > 180) {
-      let p180 = this.getArcPosition(center, radius, startAngle + 180);
-      angleMoreThan180 = [
-        "A", radius, radius, 0, 0, 1, p180.x, p180.y,
-      ];
-    }
-
-    let drawn = [
-      "M", start.x, start.y,
-      ...angleMoreThan180,
-      "A", radius, radius, 0, 0, 1, end.x, end.y
-    ];
-
-    this.pathDrawn = drawn.join(" ");
+    this.pathPrimary = this.getArcPath(start, end, p180, radius, endAngle, false);
+    this.pathSecondary = this.getArcPath(start, end, p180, radius, endAngle, true);
     this.pathCX = end.x;
     this.pathCY = end.y;
   }
