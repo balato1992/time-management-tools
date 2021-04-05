@@ -11,11 +11,11 @@ export class TimerSpinnerComponent implements OnInit {
 
   @Input() width: string;
   @Input() height: string;
-  @Input() text: string;
-  @Input() flashText: boolean;
-  @Input() percentage: number;
+  @Input() text: string = "";
+  @Input() flashText: boolean = false;
+  @Input() percentage: number = 1;
+
   size: number = 400;
-  
   pathDrawn: string;
   pathCX: number;
   pathCY: number;
