@@ -30,6 +30,8 @@
 
 # CHANGE LOG
 
+- 20210406
+  1. spinner: use 'size' to control width, height, etc.
 - 20210401
   1. refine some code and style
 - 20210330

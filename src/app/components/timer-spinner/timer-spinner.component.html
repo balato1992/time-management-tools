@@ -1,6 +1,6 @@
-
-<svg [attr.width]="width" [attr.height]="height" viewBox="0 0 100 100">
+<svg [attr.width]="width" [attr.height]="height" [attr.viewBox]="'0 0 '+size+' '+size">
     <ellipse cx="50%" cy="50%" rx="45%" ry="45%" style="fill:blue" />
-    <path fill="none" stroke="purple" stroke-width="5" [attr.d]="drawn" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" [class]="flashText ? 'blink' : ''">{{text}}</text>
+    <path fill="none" stroke="purple" [attr.stroke-width]="size/20" [attr.d]="pathDrawn" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" [attr.font-size]="size/8+'px'"
+        [class]="flashText ? 'blink' : ''">{{text}}</text>
 </svg>

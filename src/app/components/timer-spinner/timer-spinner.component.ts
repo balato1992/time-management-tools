@@ -14,7 +14,8 @@ export class TimerSpinnerComponent implements OnInit {
   @Input() text: string;
   @Input() flashText: boolean;
   @Input() percentage: number;
-  drawn: string;
+  size: number = 400;
+  pathDrawn: string;
 
   constructor() { }
 
@@ -54,8 +55,8 @@ export class TimerSpinnerComponent implements OnInit {
   drawArc(endAngle: number = 360) {
     endAngle = this.normalizeAngle(endAngle);
 
-    const center = { x: 50, y: 50 };
-    const radius = 40;
+    const center = { x: this.size / 2, y: this.size / 2 };
+    const radius = this.size * 0.4;
     const startAngle = 0;
 
     let start = this.getArcPosition(center, radius, startAngle);
@@ -75,7 +76,7 @@ export class TimerSpinnerComponent implements OnInit {
       "A", radius, radius, 0, 0, 1, end.x, end.y
     ];
 
-    this.drawn = drawn.join(" ");
+    this.pathDrawn = drawn.join(" ");
   }
 
 }
