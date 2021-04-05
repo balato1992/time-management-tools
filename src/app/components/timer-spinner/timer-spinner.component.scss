@@ -1,9 +1,16 @@
+@import '../../../styles.scss';
+
 .blink {
-    animation: blinker 1s linear infinite;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.2;
   }
-  
-  @keyframes blinker {
-    50% {
-      opacity: 0.2;
-    }
-  }
+}
+
+
+circle {
+  fill: mat-color($primary);
+}

@@ -15,7 +15,10 @@ export class TimerSpinnerComponent implements OnInit {
   @Input() flashText: boolean;
   @Input() percentage: number;
   size: number = 400;
+  
   pathDrawn: string;
+  pathCX: number;
+  pathCY: number;
 
   constructor() { }
 
@@ -77,6 +80,8 @@ export class TimerSpinnerComponent implements OnInit {
     ];
 
     this.pathDrawn = drawn.join(" ");
+    this.pathCX = end.x;
+    this.pathCY = end.y;
   }
 
 }
