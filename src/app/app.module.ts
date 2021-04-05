@@ -17,7 +17,7 @@ import { TimerPageComponent } from './components/timer-page/timer-page.component
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { TimerSpinnerComponent } from './components/timer-spinner/timer-spinner.component';
-import { TimerAddComponent } from './components/timer-add/timer-add.component';
+import { TimerInputComponent } from './components/timer-input/timer-input.component';
 import { AnimationContainerComponent } from './components/animation-container/animation-container.component';
 import { AnimationContainerGroupComponent } from './components/animation-container-group/animation-container-group.component';
 
@@ -28,7 +28,7 @@ import { AnimationContainerGroupComponent } from './components/animation-contain
     MainPageComponent,
     TimerComponent,
     TimerSpinnerComponent,
-    TimerAddComponent,
+    TimerInputComponent,
     AnimationContainerComponent,
     AnimationContainerGroupComponent
   ],

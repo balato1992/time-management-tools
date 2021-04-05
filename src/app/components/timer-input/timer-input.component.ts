@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-timer-add',
-  templateUrl: './timer-add.component.html',
-  styleUrls: ['./timer-add.component.scss']
+  selector: 'app-timer-input',
+  templateUrl: './timer-input.component.html',
+  styleUrls: ['./timer-input.component.scss']
 })
-export class TimerAddComponent implements OnInit {
+export class TimerInputComponent implements OnInit {
 
   readonly nums: Array<number> = Array.from(Array(60).keys());
 

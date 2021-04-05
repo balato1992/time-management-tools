@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimerAddComponent } from './timer-add.component';
+import { TimerInputComponent } from './timer-input.component';
 
-describe('TimerAddComponent', () => {
-  let component: TimerAddComponent;
-  let fixture: ComponentFixture<TimerAddComponent>;
+describe('TimerInputComponent', () => {
+  let component: TimerInputComponent;
+  let fixture: ComponentFixture<TimerInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TimerAddComponent ]
+      declarations: [ TimerInputComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TimerAddComponent);
+    fixture = TestBed.createComponent(TimerInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
