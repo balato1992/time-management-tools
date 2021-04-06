@@ -26,6 +26,7 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
 })
 export class AnimationContainerComponent implements OnInit {
 
+  @Input() uid: string = '';
   isShow: boolean = false;
   isAnimating: boolean = false;
   location: number = 0;

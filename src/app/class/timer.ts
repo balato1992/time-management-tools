@@ -115,6 +115,10 @@ export class Timer {
         });
     }
 
+    unsubscribe() {
+        this.subscription?.unsubscribe();
+    }
+
     getTimesup() {
         return this.timesup$.pipe();
     }

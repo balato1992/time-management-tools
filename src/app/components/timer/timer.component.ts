@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 
 import { TimerInputComponent } from '../timer-input/timer-input.component';
 
-export class TimerButtonInfos {
+export class TimerDisplayInfo {
   input: boolean = true;
   upperReset: boolean = false;
   lowerReset: boolean = false;
-  start: boolean = true;
+  start: boolean = false;
   pause: boolean = false;
   textFlashing: boolean = false;
 }
@@ -18,7 +18,7 @@ export class TimerButtonInfos {
 })
 export class TimerComponent implements OnInit {
 
-  @Input() buttonInfos: TimerButtonInfos = new TimerButtonInfos();
+  @Input() displayInfos: TimerDisplayInfo = new TimerDisplayInfo();
   @Input() spinnerText: string = '';
   @Input() spinnerPercentage: number = 0;
 
@@ -38,5 +38,8 @@ export class TimerComponent implements OnInit {
   getInputTotalSeconds(): number {
 
     return this.timerInput.getTotalSeconds();
+  }
+  clearInput() {
+    this.timerInput.clear();
   }
 }

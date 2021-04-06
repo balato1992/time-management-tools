@@ -2,29 +2,33 @@
     <mat-card style="max-width: 540px; margin: 0px auto;">
 
         <div style="display: flex;">
-            <button mat-raised-button color="primary" *ngIf="showCancel()" (click)="switchToTimers()">Cancel</button>
-            <button mat-raised-button color="primary" (click)="playAudio()">Test sound</button>
+            <button mat-raised-button color="primary" *ngIf="btnVisibility.cancel"
+                (click)="switchToTimers()">Cancel</button>
+            <button mat-raised-button color="primary" *ngIf="btnVisibility.delete"
+                (click)="deleteTimer()">Delete</button>
             <div style="flex-grow: 1;"></div>
-            <button mat-raised-button color="primary" *ngIf="showAdd()" (click)="switchToTimerAdding()">Add</button>
+            <button mat-raised-button color="primary" *ngIf="btnVisibility.add"
+                (click)="switchToTimerAdding()">Add</button>
         </div>
 
 
         <app-animation-container-group #containerGroup>
             <app-animation-container #timerAddingContainer>
-                <app-timer #timerComponent (start)="addTimer()"></app-timer>
+                <app-timer #timerComponent [displayInfos]="getInputDisplayInfo()" (start)="addTimer()"></app-timer>
             </app-animation-container>
             <app-animation-container #timersContainer>
-                <mat-tab-group mat-align-tabs="start">
-                    <mat-tab *ngFor="let timer of timers" [label]="timer.name">
-                        <app-timer [buttonInfos]="getTimerInfos(timer.state)" [spinnerText]="timer.strRemainingTime"
+                <app-animation-container-group #timersContainerGroup>
+                    <app-animation-container *ngFor="let timer of timers" [uid]="timer.uid">
+                        <app-timer [displayInfos]="getTimerInfos(timer.state)" [spinnerText]="timer.strRemainingTime"
                             [spinnerPercentage]="timer.percentage" (start)="timer.resume()" (pause)="timer.pause()"
                             (reset)="timer.reset()">
                         </app-timer>
-                    </mat-tab>
-                </mat-tab-group>
+                    </app-animation-container>
+                </app-animation-container-group>
             </app-animation-container>
         </app-animation-container-group>
 
 
     </mat-card>
 </div>
+<button mat-raised-button color="primary" (click)="playAudio()">Test sound</button>
