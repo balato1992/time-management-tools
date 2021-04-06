@@ -4,31 +4,31 @@
         <tr style="height: 20%;"></tr>
         <tr style="height: 15%;">
             <td>
-                <button mat-button aria-label="reset button" class="btn-center-vertial"
-                    *ngIf="showUpperStop(timer.state)" (click)="timer.reset()">
+                <button mat-button aria-label="reset button" class="btn-center-vertial" *ngIf="buttonInfos.upperReset"
+                    (click)="reset.emit()">
                     Reset
                 </button>
             </td>
         </tr>
         <tr style="height: 20%;">
             <td>
-                <!--<app-timer-input style="display: table; margin: 0 auto;"></app-timer-input>-->
+                <app-timer-input #timerInput style="display: table; margin: 0 auto;" *ngIf="buttonInfos.input"></app-timer-input>
             </td>
         </tr>
         <tr style="height: 15%;">
             <td>
                 <button mat-button aria-label="start button" class="btn-center-vertial btn-icon"
-                    *ngIf="showPlay(timer.state)" (click)="timer.resume()">
+                    *ngIf="buttonInfos.start" (click)="start.emit()">
                     <mat-icon>play_arrow</mat-icon>
                     Start
                 </button>
                 <button mat-button aria-label="pause button" class="btn-center-vertial btn-icon"
-                    *ngIf="showPause(timer.state)" (click)="timer.pause()">
+                    *ngIf="buttonInfos.pause" (click)="pause.emit()">
                     <mat-icon>pause</mat-icon>
                     Pause
                 </button>
                 <button mat-button aria-label="reset button" class="btn-center-vertial btn-icon"
-                    *ngIf="showLowerStop(timer.state)" (click)="timer.reset()">
+                    *ngIf="buttonInfos.lowerReset" (click)="reset.emit()">
                     <mat-icon>stop</mat-icon>
                     Reset
                 </button>
@@ -37,16 +37,13 @@
         <tr style="height: 20%;"></tr>
     </table>
 
-    <app-timer-spinner width="300px" height="300px" [text]="timer.strRemainingTime" [flashText]="flashText(timer.state)"
-        [percentage]="timer.percentage"
+    <app-timer-spinner width="300px" height="300px" [text]="spinnerText" [flashText]="buttonInfos.textFlashing"
+        [percentage]="spinnerPercentage"
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
     </app-timer-spinner>
 </div>
 
-<input matInput type="text" [(ngModel)]="timer.name">
-<div>{{timer.state.toString()}}</div>
-<input matInput type="number" [(ngModel)]="timer.timeInSecond">
-
-
+<!--
 <button mat-raised-button color="primary" (click)="timer.add()">add one second</button>
 <button mat-raised-button color="primary" (click)="deleteTimer()">Delete</button>
+-->

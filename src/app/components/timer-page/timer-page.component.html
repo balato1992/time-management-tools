@@ -5,19 +5,21 @@
             <button mat-raised-button color="primary" *ngIf="showCancel()" (click)="switchToTimers()">Cancel</button>
             <button mat-raised-button color="primary" (click)="playAudio()">Test sound</button>
             <div style="flex-grow: 1;"></div>
-            <button mat-raised-button color="primary" (click)="addTimer2()">Add-</button>
             <button mat-raised-button color="primary" *ngIf="showAdd()" (click)="switchToTimerAdding()">Add</button>
         </div>
 
 
         <app-animation-container-group #containerGroup>
             <app-animation-container #timerAddingContainer>
-                <app-timer-input></app-timer-input>
+                <app-timer #timerComponent (start)="addTimer()"></app-timer>
             </app-animation-container>
             <app-animation-container #timersContainer>
                 <mat-tab-group mat-align-tabs="start">
                     <mat-tab *ngFor="let timer of timers" [label]="timer.name">
-                        <app-timer [timer]="timer"></app-timer>
+                        <app-timer [buttonInfos]="getTimerInfos(timer.state)" [spinnerText]="timer.strRemainingTime"
+                            [spinnerPercentage]="timer.percentage" (start)="timer.resume()" (pause)="timer.pause()"
+                            (reset)="timer.reset()">
+                        </app-timer>
                     </mat-tab>
                 </mat-tab-group>
             </app-animation-container>

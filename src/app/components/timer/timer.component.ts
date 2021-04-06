@@ -1,6 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
-import { Timer, TimerState } from '../../class/timer';
+import { TimerInputComponent } from '../timer-input/timer-input.component';
+
+export class TimerButtonInfos {
+  input: boolean = true;
+  upperReset: boolean = false;
+  lowerReset: boolean = false;
+  start: boolean = true;
+  pause: boolean = false;
+  textFlashing: boolean = false;
+}
 
 @Component({
   selector: 'app-timer',
@@ -9,33 +18,25 @@ import { Timer, TimerState } from '../../class/timer';
 })
 export class TimerComponent implements OnInit {
 
-  @Input() timer: Timer;
+  @Input() buttonInfos: TimerButtonInfos = new TimerButtonInfos();
+  @Input() spinnerText: string = '';
+  @Input() spinnerPercentage: number = 0;
+
+  @Output() start = new EventEmitter<any>();
+  @Output() pause = new EventEmitter<any>();
+  @Output() reset = new EventEmitter<any>();
+
+  @ViewChild('timerInput') timerInput: TimerInputComponent;
 
   constructor() {
-
   }
 
   ngOnInit(): void {
   }
 
 
-  flashText(state: TimerState) {
-    return state == TimerState.Paused || state == TimerState.TimesUp;
-  }
-  showUpperStop(state: TimerState) {
-    return state == TimerState.Paused;
-  }
-  showLowerStop(state: TimerState) {
-    return state == TimerState.TimesUp;
-  }
-  showPlay(state: TimerState) {
-    return state == TimerState.Ready || state == TimerState.Paused;
-  }
-  showPause(state: TimerState) {
-    return state == TimerState.Counting;
-  }
+  getInputTotalSeconds(): number {
 
-  deleteTimer() {
+    return this.timerInput.getTotalSeconds();
   }
-
 }

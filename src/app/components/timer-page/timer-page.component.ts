@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 
 import { AnimationContainerGroupComponent } from '../animation-container-group/animation-container-group.component';
 import { AnimationContainerComponent } from '../animation-container/animation-container.component';
-import { Timer } from '../../class/timer';
+import { TimerComponent, TimerButtonInfos } from '../timer/timer.component';
+import { Timer, TimerState } from '../../class/timer';
 
 @Component({
   selector: 'app-timer-page',
@@ -14,12 +15,25 @@ export class TimerPageComponent implements OnInit {
   @ViewChild('timerAddingContainer') timerAddingContainer: AnimationContainerComponent;
   @ViewChild('timersContainer') timersContainer: AnimationContainerComponent;
 
+  @ViewChild('timerComponent') timerComponent: TimerComponent;
+
   timers: Timer[] = [];
   tmpcount: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getTimerInfos(state: TimerState): TimerButtonInfos {
+    return {
+      input: false,
+      upperReset: state === TimerState.Paused,
+      lowerReset: state === TimerState.TimesUp,
+      start: state === TimerState.Ready || state === TimerState.Paused,
+      pause: state === TimerState.Counting,
+      textFlashing: state === TimerState.Paused || state === TimerState.TimesUp,
+    };
   }
 
   showCancel() {
@@ -37,10 +51,13 @@ export class TimerPageComponent implements OnInit {
     this.containerGroup.switchTo(this.timersContainer);
   }
 
-  addTimer2() {
+  addTimer() {
+    let totalSeconds = this.timerComponent.getInputTotalSeconds();
+
     let timer = new Timer();
     timer.subscribe();
     timer.getTimesup().subscribe(o => this.playAudio());
+    timer.timeInSecond = totalSeconds;
 
     this.timers.push(timer);
   }
