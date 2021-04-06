@@ -36,6 +36,7 @@
   3. change 'timer-add' to 'timer-input'
   4. spinner: add primary color arc and code refine
   5. timer: change appearance
+  6. spinner: if percentage isn't valid show 100%
 - 20210401
   1. refine some code and style
 - 20210330

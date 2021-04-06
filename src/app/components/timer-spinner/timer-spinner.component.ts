@@ -30,8 +30,8 @@ export class TimerSpinnerComponent implements OnInit {
     if (changes.percentage) {
 
       let value = changes.percentage.currentValue;
-      if (Number.isNaN(value)) {
-        value = 0;
+      if (isNaN(value)) {
+        value = 1;
       }
       this.draw(value * 360);
     }
