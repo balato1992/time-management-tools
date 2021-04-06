@@ -35,6 +35,7 @@
   2. spinner: add circle and change style
   3. change 'timer-add' to 'timer-input'
   4. spinner: add primary color arc and code refine
+  5. timer: change appearance
 - 20210401
   1. refine some code and style
 - 20210330
