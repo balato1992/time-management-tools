@@ -39,6 +39,7 @@
   6. spinner: if percentage isn't valid show 100%
   7. timerInput: add getTotalSeconds and refine code
   8. timer: move timer controlling to timerPage
+  9. timer class: add uid
 - 20210401
   1. refine some code and style
 - 20210330

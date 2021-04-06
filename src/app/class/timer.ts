@@ -1,6 +1,7 @@
 import { timer } from 'rxjs';
 import { merge, Subject, Subscription, NEVER } from 'rxjs';
 import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
+import { v4 as uuidv4 } from 'uuid';
 
 import { GeneralMethodsService as gms } from '../services/general-methods.service';
 
@@ -23,6 +24,7 @@ interface TimerData {
 export class Timer {
     readonly unitOfOneTick = 20;
 
+    uid: string;
     name: string;
     state: TimerState;
     _timeInSecond: number;
@@ -55,6 +57,7 @@ export class Timer {
     private readonly timesup$: Subject<void>;
 
     constructor() {
+        this.uid = uuidv4();
         this.name = "";
         this.state = TimerState.Unknown;
         this._timeInSecond = 0;
