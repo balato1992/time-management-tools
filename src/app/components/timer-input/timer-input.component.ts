@@ -9,18 +9,24 @@ export class TimerInputComponent implements OnInit {
 
   readonly nums: Array<number> = Array.from(Array(60).keys());
 
-  times: Array<{ name: string, value: number }> = [
-    { name: "hour", value: 0 },
-    { name: "minute", value: 0 },
-    { name: "second", value: 0 },
+  timeInfos: Array<{ name: string, value: number, toSeconds: number }> = [
+    { name: "hour", value: 0, toSeconds: 3600 },
+    { name: "minute", value: 0, toSeconds: 60 },
+    { name: "second", value: 0, toSeconds: 1 },
   ];
-
-  hour: number = 0;
-  minute: number = 0;
-  second: number = 0;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  getTotalSeconds(): number {
+
+    let totalSeconds = 0;
+    for (let info of this.timeInfos) {
+
+      totalSeconds += info.value * info.toSeconds;
+    }
+
+    return totalSeconds;
   }
 }
