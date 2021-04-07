@@ -9,6 +9,7 @@ import { delay } from 'rxjs/operators';
 })
 export class AnimationContainerGroupComponent implements OnInit {
 
+  @Input() showSlick: boolean = true;
   @ContentChildren(AnimationContainerComponent) tabItems: QueryList<AnimationContainerComponent>;
 
   currentIndex: number = -1;

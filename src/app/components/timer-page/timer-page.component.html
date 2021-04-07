@@ -1,9 +1,13 @@
 <div style="padding: 24px;">
     <mat-card style="max-width: 540px; margin: 0px auto;">
 
-        <app-animation-container-group #containerGroup>
+        <app-animation-container-group #containerGroup [showSlick]="false">
             <app-animation-container #timerAddingContainer [easeIn]="true">
-                <app-timer #inputComponent></app-timer>
+                <app-animation-container-group [showSlick]="false">
+                    <app-animation-container>
+                        <app-timer #inputComponent></app-timer>
+                    </app-animation-container>
+                </app-animation-container-group>
             </app-animation-container>
             <app-animation-container #timersContainer [easeIn]="true">
                 <app-animation-container-group #timersContainerGroup>
@@ -24,7 +28,8 @@
                 (click)="deleteTimer()">Delete</button>
             <div style="flex-grow: 1;"></div>
             <button mat-raised-button color="primary" *ngIf="getBtnVisibility().add" (click)="addTimer()">Add</button>
-            <button mat-raised-button color="primary" *ngIf="getBtnVisibility().addTimer" (click)="showContainerPage(1)">Add
+            <button mat-raised-button color="primary" *ngIf="getBtnVisibility().addTimer"
+                (click)="showContainerPage(1)">Add
                 Timer</button>
         </div>
 

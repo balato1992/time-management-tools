@@ -1,10 +1,15 @@
-<div>
-    
-    <div>
-        <button *ngFor="let tabItem of tabItems" (click)="switchToItem(tabItem)">ACG</button>
+<div style="display: table; margin: 0 auto;">
+    <div style="display: table-cell; width: 100%; vertical-align: middle;">
+        <div style="margin: 0 auto;" class="group-div">
+            <ng-content></ng-content>
+        </div>
     </div>
 
-    <div class="group-div">
-        <ng-content></ng-content>
+    <div style="display: table-cell; vertical-align: middle;">
+        <ul style="margin: 0 auto;" [style.visibility]="showSlick?'':'hidden'">
+            <li *ngFor="let tabItem of tabItems; index as i" (click)="switchToItem(tabItem)"
+                [class]="currentIndex===i?'active':''">
+            </li>
+        </ul>
     </div>
 </div>

@@ -32,7 +32,7 @@
 
 - 20210407
   1. animation-container.component: change switchItem to switch index
-  2. animation-container.component: change switchItem to switch index
+  2. animation-container.component: imporve slick style
   3. timer.component: spinner initialized with 1
   4. imporve style
 - 20210406

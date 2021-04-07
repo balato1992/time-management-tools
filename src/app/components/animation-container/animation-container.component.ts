@@ -9,12 +9,12 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
     trigger('transformDiv', [
       state('center', style({
       })),
-      state('left', style({
-        transform: 'translate3d(-100%, 0px, 0px)',
+      state('up', style({
+        transform: 'translate3d(0, -100%, 0px)',
         visibility: 'hidden',
       })),
-      state('right', style({
-        transform: 'translate3d(100%, 0px, 0px)',
+      state('down', style({
+        transform: 'translate3d(0, 100%, 0px)',
         visibility: 'hidden',
       })),
       state('up-ease', style({
@@ -62,9 +62,9 @@ export class AnimationContainerComponent implements OnInit {
       if (this.location == 0)
         return 'center';
       else if (this.location > 0)
-        return 'right';
+        return 'down';
       else
-        return 'left';
+        return 'up';
     } else {
 
       if (this.location == 0)
