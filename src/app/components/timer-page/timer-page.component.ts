@@ -5,6 +5,7 @@ import { AnimationContainerComponent } from '../animation-container/animation-co
 import { TimerComponent, TimerDisplayInfo } from '../timer/timer.component';
 import { Timer, TimerState } from '../../class/timer';
 
+
 @Component({
   selector: 'app-timer-page',
   templateUrl: './timer-page.component.html'
@@ -14,32 +15,22 @@ export class TimerPageComponent implements OnInit {
   @ViewChild('containerGroup') containerGroup: AnimationContainerGroupComponent;
   @ViewChild('timerAddingContainer') timerAddingContainer: AnimationContainerComponent;
   @ViewChild('timersContainer') timersContainer: AnimationContainerComponent;
-  @ViewChild('timersContainerGroup') timersContainerGroup: AnimationContainerGroupComponent;
 
-  @ViewChild('timerComponent') timerComponent: TimerComponent;
+  @ViewChild('timersContainerGroup') timersContainerGroup: AnimationContainerGroupComponent;
+  @ViewChild('inputComponent') inputComponent: TimerComponent;
 
   timers: Timer[] = [];
-  btnVisibility: { cancel: boolean, add: boolean, delete: boolean } = {
-    cancel: false,
-    add: false,
-    delete: false,
-  };
+  pageNum: number;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  getInputDisplayInfo(): TimerDisplayInfo {
-
-    let info = new TimerDisplayInfo();
-
-    if (this.timerComponent !== undefined) {
-      info.start = this.timerComponent.getInputTotalSeconds() > 0;
-    }
-
-    return info;
+  ngAfterViewInit() {
+    this.showContainerPage(1);
   }
+
   getTimerInfos(state: TimerState): TimerDisplayInfo {
     return {
       input: false,
@@ -50,60 +41,58 @@ export class TimerPageComponent implements OnInit {
       textFlashing: state === TimerState.Paused || state === TimerState.TimesUp,
     };
   }
-  setBtnVisibility() {
+  getBtnVisibility() {
 
-    this.btnVisibility = {
-      cancel: this.containerGroup?.currentTabItem === this.timerAddingContainer && this.timers.length > 0,
-      add: this.containerGroup?.currentTabItem === this.timersContainer,
-      delete: this.containerGroup?.currentTabItem === this.timersContainer && this.timers.length > 0,
+    let totalSeconds = this.inputComponent?.getInputTotalSeconds() ?? 0;
+
+    return {
+      add: this.pageNum === 1 && totalSeconds > 0,
+      cancel: this.pageNum === 1 && this.timers.length > 0,
+      addTimer: this.pageNum === 2,
+      delete: this.pageNum === 2 && this.timers.length > 0,
     };
   }
 
-  addTimer() {
-    let totalSeconds = this.timerComponent.getInputTotalSeconds();
+  showContainerPage(num: number) {
 
+    if (num === 1) {
+      this.inputComponent.clearInput();
+      this.containerGroup.switchToItem(this.timerAddingContainer);
+    }
+    else if (num === 2) {
+      this.containerGroup.switchToItem(this.timersContainer);
+    }
+    this.pageNum = num;
+  }
+
+  addTimer() {
+    
     let timer = new Timer();
     timer.subscribe();
     timer.getTimesup().subscribe(o => this.playAudio());
-    timer.timeInSecond = totalSeconds;
+    timer.timeInSecond = this.inputComponent.getInputTotalSeconds();
 
     this.timers.push(timer);
 
-    this.switchToTimers();
+    this.showContainerPage(2);
+    setTimeout(() => {
+      this.timersContainerGroup.switchToLast();
+    }, 0);
   }
   deleteTimer() {
-    if (this.containerGroup?.currentTabItem === this.timersContainer) {
 
-      console.log("----");
-      let current = this.timersContainerGroup?.currentTabItem;
-      if (current !== undefined) {
-        let uid = current.uid;
-        let index = this.timers.findIndex(t => t.uid === uid);
+    let currentIndex = this.timersContainerGroup.currentIndex;
+    if (currentIndex >= 0) {
 
-        console.log(uid);
-        console.log(index);
-        if (index > -1) {
-          this.timers[index].unsubscribe();
-          this.timers.splice(index, 1);
+      this.timers[currentIndex].unsubscribe();
+      this.timers.splice(currentIndex, 1);
 
-          if (this.timers.length > 0) {
-            this.switchToTimers();
-          } else {
-            this.switchToTimerAdding();
-          }
-        }
+      if (this.timers.length > 0) {
+        this.showContainerPage(2);
+      } else {
+        this.showContainerPage(1);
       }
     }
-  }
-
-  switchToTimerAdding() {
-    this.timerComponent.clearInput();
-    this.containerGroup.switchTo(this.timerAddingContainer);
-    this.setBtnVisibility();
-  }
-  switchToTimers() {
-    this.containerGroup.switchTo(this.timersContainer);
-    this.setBtnVisibility();
   }
 
   playAudio() {

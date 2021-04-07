@@ -20,7 +20,7 @@ export class TimerComponent implements OnInit {
 
   @Input() displayInfos: TimerDisplayInfo = new TimerDisplayInfo();
   @Input() spinnerText: string = '';
-  @Input() spinnerPercentage: number = 0;
+  @Input() spinnerPercentage: number = 1;
 
   @Output() start = new EventEmitter<any>();
   @Output() pause = new EventEmitter<any>();

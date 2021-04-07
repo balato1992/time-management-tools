@@ -30,6 +30,11 @@
 
 # CHANGE LOG
 
+- 20210407
+  1. animation-container.component: change switchItem to switch index
+  2. animation-container.component: change switchItem to switch index
+  3. timer.component: spinner initialized with 1
+  4. imporve style
 - 20210406
   1. spinner: use 'size' to control width, height, etc.
   2. spinner: add circle and change style

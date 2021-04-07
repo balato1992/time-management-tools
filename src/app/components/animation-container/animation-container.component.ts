@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, HostBinding, Input } from '@angular/core';
 import { trigger, state, style, animate, transition, } from '@angular/animations';
 
 @Component({
@@ -8,25 +8,40 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
   animations: [
     trigger('transformDiv', [
       state('center', style({
-        //transition: 'all 3s ease-in'
       })),
       state('left', style({
         transform: 'translate3d(-100%, 0px, 0px)',
-        //transition: 'all 3s ease-in'
+        visibility: 'hidden',
       })),
       state('right', style({
         transform: 'translate3d(100%, 0px, 0px)',
-        //transition: 'all 3s ease-in'
+        visibility: 'hidden',
       })),
+      state('up-ease', style({
+        transform: 'translate3d(0, -20%, 0px)',
+        opacity: 0,
+        visibility: 'hidden',
+      })),
+      state('down-ease', style({
+        transform: 'translate3d(0, 20%, 0px)',
+        opacity: 0,
+        visibility: 'hidden',
+      })),
+      transition('* => up-ease, * => down-ease', [
+        animate('.2s')
+      ]),
+      transition('up-ease => *, down-ease => *', [
+        animate('.2s .3s ease-out')
+      ]),
       transition('* <=> *', [
-        animate('.5s')
+        animate('.3s')
       ]),
     ])
   ]
 })
 export class AnimationContainerComponent implements OnInit {
 
-  @Input() uid: string = '';
+  @Input() easeIn: boolean = false;
   isShow: boolean = false;
   isAnimating: boolean = false;
   location: number = 0;
@@ -42,12 +57,23 @@ export class AnimationContainerComponent implements OnInit {
   }
 
   getAnimationState(): string {
-    if (this.location == 0)
-      return 'center';
-    else if (this.location > 0)
-      return 'right';
-    else
-      return 'left';
+    if (!this.easeIn) {
+
+      if (this.location == 0)
+        return 'center';
+      else if (this.location > 0)
+        return 'right';
+      else
+        return 'left';
+    } else {
+
+      if (this.location == 0)
+        return 'center';
+      else if (this.location > 0)
+        return 'up-ease';
+      else
+        return 'down-ease';
+    }
   }
   isShowContent(): boolean {
     return this.isShow || this.isAnimating;

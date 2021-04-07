@@ -1,6 +1,6 @@
-import { Component, OnInit, ContentChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import { AnimationContainerComponent } from '../animation-container/animation-container.component';
-
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-animation-container-group',
@@ -11,7 +11,11 @@ export class AnimationContainerGroupComponent implements OnInit {
 
   @ContentChildren(AnimationContainerComponent) tabItems: QueryList<AnimationContainerComponent>;
 
-  currentTabItem: AnimationContainerComponent | undefined;
+  currentIndex: number = -1;
+  get currentTabItem(): AnimationContainerComponent | undefined {
+
+    return this.tabItems.get(this.currentIndex);
+  }
 
   constructor() { }
 
@@ -19,31 +23,46 @@ export class AnimationContainerGroupComponent implements OnInit {
   }
 
   ngAfterContentInit() {
+    this.tabItems.changes.pipe(delay(0)).subscribe(() => {
+      this.switchToIndex(this.currentIndex);
+    });
 
-    if (this.tabItems.length > 0) {
-      this.switchTo(this.tabItems.get(0));
-    }
+    this.switchToFirst();
   }
 
-  switchTo(tabItem: AnimationContainerComponent | undefined) {
 
-    let arrTabItems = this.tabItems.toArray();
+  switchToIndex(toIndex: number) {
 
-    let lastTabItem = this.currentTabItem;
-    this.currentTabItem = tabItem;
+    let itmesLength = this.tabItems.length;
+    if (toIndex >= itmesLength) {
+      toIndex = itmesLength - 1;
+    }
 
-    let index = arrTabItems.findIndex(t => t == tabItem);
-    arrTabItems.forEach((t, i) => {
+    let currentIndex = this.currentIndex;
+    this.currentIndex = toIndex;
 
-      let isShow = (t === lastTabItem || t === tabItem);
+    this.tabItems.forEach((t, i) => {
 
-      if (index >= 0) {
-        t.setVisible(i - index, isShow);
-      }
-      else {
+      let isShow = (i === currentIndex || i === toIndex);
+
+      if (toIndex >= 0) {
+        t.setVisible(i - toIndex, isShow);
+      } else {
         t.setVisible(-1, isShow);
       }
     });
-
   }
+  switchToFirst() {
+    this.switchToIndex(0);
+  }
+  switchToLast() {
+    this.switchToIndex(this.tabItems.length);
+  }
+  switchToItem(tabItem: AnimationContainerComponent | undefined) {
+
+    let index = this.tabItems.toArray().findIndex(t => t == tabItem);
+
+    this.switchToIndex(index);
+  }
+
 }
