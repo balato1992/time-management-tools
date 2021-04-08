@@ -33,6 +33,7 @@
 
 - 20210408
   1. animation-container.component: improve switching mechanism and animation
+  2. style: add _variables.scss to store variable
 - 20210407
   1. animation-container.component: change switchItem to switch index
   2. animation-container.component: imporve slick style

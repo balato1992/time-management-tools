@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@import '../../../_variables.scss';
 
 .blink {
   animation: blinker 1s linear infinite;
@@ -14,6 +14,7 @@
 circle {
   fill: mat-color($primary);
 }
+
 path.primary {
   stroke: mat-color($primary);
 }
