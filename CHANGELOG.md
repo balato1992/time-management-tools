@@ -10,6 +10,7 @@
   - percentage after add time
   - figure out how tab css work
 
+- add, delete flash
 - add instructions
 - timer series
 - style dark mode
@@ -30,6 +31,8 @@
 
 # CHANGE LOG
 
+- 20210408
+  1. animation-container.component: improve switching animation
 - 20210407
   1. animation-container.component: change switchItem to switch index
   2. animation-container.component: imporve slick style

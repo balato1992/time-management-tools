@@ -7,8 +7,7 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
   styleUrls: ['./animation-container.component.scss'],
   animations: [
     trigger('transformDiv', [
-      state('center', style({
-      })),
+      state('center', style({})),
       state('up', style({
         transform: 'translate3d(0, -100%, 0px)',
         visibility: 'hidden',
@@ -44,7 +43,7 @@ export class AnimationContainerComponent implements OnInit {
   @Input() easeIn: boolean = false;
   isShow: boolean = false;
   isAnimating: boolean = false;
-  location: number = 0;
+  location: number = 1;
 
   @HostBinding('class.active') get getTestactive(): boolean {
     return this.location == 0;
@@ -57,23 +56,15 @@ export class AnimationContainerComponent implements OnInit {
   }
 
   getAnimationState(): string {
-    if (!this.easeIn) {
 
-      if (this.location == 0)
-        return 'center';
-      else if (this.location > 0)
-        return 'down';
-      else
-        return 'up';
-    } else {
+    let postfix = this.easeIn ? '-ease' : '';
 
-      if (this.location == 0)
-        return 'center';
-      else if (this.location > 0)
-        return 'up-ease';
-      else
-        return 'down-ease';
-    }
+    if (this.location == 0)
+      return 'center';
+    else if (this.location > 0)
+      return 'down' + postfix;
+    else
+      return 'up' + postfix;
   }
   isShowContent(): boolean {
     return this.isShow || this.isAnimating;

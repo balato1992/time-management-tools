@@ -1,6 +1,5 @@
-import { Component, OnInit, ContentChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input } from '@angular/core';
 import { AnimationContainerComponent } from '../animation-container/animation-container.component';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-animation-container-group',
@@ -24,9 +23,6 @@ export class AnimationContainerGroupComponent implements OnInit {
   }
 
   ngAfterContentInit() {
-    this.tabItems.changes.pipe(delay(0)).subscribe(() => {
-      this.switchToIndex(this.currentIndex);
-    });
 
     this.switchToFirst();
   }

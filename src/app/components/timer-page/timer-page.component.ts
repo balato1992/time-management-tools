@@ -66,7 +66,7 @@ export class TimerPageComponent implements OnInit {
   }
 
   addTimer() {
-    
+
     let timer = new Timer();
     timer.subscribe();
     timer.getTimesup().subscribe(o => this.playAudio());
@@ -74,9 +74,9 @@ export class TimerPageComponent implements OnInit {
 
     this.timers.push(timer);
 
-    this.showContainerPage(2);
     setTimeout(() => {
       this.timersContainerGroup.switchToLast();
+      this.showContainerPage(2);
     }, 0);
   }
   deleteTimer() {
@@ -84,14 +84,16 @@ export class TimerPageComponent implements OnInit {
     let currentIndex = this.timersContainerGroup.currentIndex;
     if (currentIndex >= 0) {
 
+      if (this.timers.length <= 1) {
+        this.showContainerPage(1);
+      } else {
+        this.showContainerPage(2);
+      }
+      this.timersContainerGroup.switchToIndex(currentIndex - 1);
+
       this.timers[currentIndex].unsubscribe();
       this.timers.splice(currentIndex, 1);
 
-      if (this.timers.length > 0) {
-        this.showContainerPage(2);
-      } else {
-        this.showContainerPage(1);
-      }
     }
   }
 
