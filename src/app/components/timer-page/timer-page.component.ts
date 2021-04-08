@@ -74,21 +74,24 @@ export class TimerPageComponent implements OnInit {
         toIndex = tabLength;
         break;
       case 4: // delete timer
-        toIndex = currentIndex - 1;
-        tabLength -= 1;
+        lastIndex = currentIndex;
+        toIndex = currentIndex + 1;
+        if (toIndex === tabLength) {
+          toIndex = currentIndex - 1;
+        }
         break;
     }
 
-    if (tabLength == 1) {
+    if (tabLength === 1) {
       toIndex = 0;
     }
-    if (toIndex == 0) {
+    if (toIndex === 0) {
       this.inputComponent.clearInput();
     }
 
     this.containerGroup.switchToIndex(toIndex, true);
     this.pageInfo = {
-      state: toIndex <= 0 ? 1 : 2,
+      state: toIndex === 0 ? 1 : 2,
       lastIndex: lastIndex
     };
   }
@@ -121,6 +124,10 @@ export class TimerPageComponent implements OnInit {
 
       this.timers[currentIndex].unsubscribe();
       this.timers.splice(currentIndex, 1);
+
+      setTimeout(() => {
+        this.showContainerPage(2);
+      }, 0);
     }
   }
 

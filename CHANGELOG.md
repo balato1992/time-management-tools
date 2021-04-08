@@ -2,20 +2,23 @@
 # TODO
 
 - timer
-  - improve style
+  - unsubscribe
   - change sound
   - sound last until click stop button or other mechanism
-  - improve spinner
-  - update period
-  - percentage after add time
+  - add time
   - figure out how tab css work
+  - alart in page
+  - timer name
+  - test sound location
+- multiple timer
+  - forbid button click while animating
+  - style without button
+  - limit timer count
 
-- add, delete flash
 - add instructions
 - timer series
-- style dark mode
-- language
-
+- style: dark mode
+- multiple language
 - add test
 
 # DONE
@@ -24,10 +27,14 @@
   - play
   - pause
   - reset
+  - delete
   - UI
     - spinner
     - format remaining time
     - flashing remaining time when time paused
+- multiple timer
+  - slicks
+  - animations
 
 # CHANGE LOG
 
