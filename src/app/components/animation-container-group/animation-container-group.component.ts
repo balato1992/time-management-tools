@@ -8,13 +8,18 @@ import { AnimationContainerComponent } from '../animation-container/animation-co
 })
 export class AnimationContainerGroupComponent implements OnInit {
 
-  @Input() showSlick: boolean = true;
+  @Input() showSlicks: boolean = true;
+
   @ContentChildren(AnimationContainerComponent) tabItems: QueryList<AnimationContainerComponent>;
 
   currentIndex: number = -1;
   get currentTabItem(): AnimationContainerComponent | undefined {
 
     return this.tabItems.get(this.currentIndex);
+  }
+  get tabLength(): number {
+
+    return this.tabItems.length;
   }
 
   constructor() { }
@@ -23,12 +28,9 @@ export class AnimationContainerGroupComponent implements OnInit {
   }
 
   ngAfterContentInit() {
-
-    this.switchToFirst();
   }
 
-
-  switchToIndex(toIndex: number) {
+  switchToIndex(toIndex: number, isEase: boolean = false) {
 
     let itmesLength = this.tabItems.length;
     if (toIndex >= itmesLength) {
@@ -43,23 +45,10 @@ export class AnimationContainerGroupComponent implements OnInit {
       let isShow = (i === currentIndex || i === toIndex);
 
       if (toIndex >= 0) {
-        t.setVisible(i - toIndex, isShow);
+        t.setVisible(i - toIndex, isShow, isEase);
       } else {
-        t.setVisible(-1, isShow);
+        t.setVisible(-1, isShow, isEase);
       }
     });
   }
-  switchToFirst() {
-    this.switchToIndex(0);
-  }
-  switchToLast() {
-    this.switchToIndex(this.tabItems.length);
-  }
-  switchToItem(tabItem: AnimationContainerComponent | undefined) {
-
-    let index = this.tabItems.toArray().findIndex(t => t == tabItem);
-
-    this.switchToIndex(index);
-  }
-
 }

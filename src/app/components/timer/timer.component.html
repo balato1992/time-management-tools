@@ -1,47 +1,46 @@
+<table style="width: 100%; height: 100%;">
+    <tr style="height: 20%;"></tr>
+    <tr style="height: 15%;">
+        <td>
+            <button mat-button aria-label="reset button" class="btn-center-vertial" *ngIf="displayInfos.upperReset"
+                (click)="reset.emit()">
+                Reset
+            </button>
+        </td>
+    </tr>
+    <tr style="height: 20%;">
+        <td>
+            <app-timer-input #timerInput style="display: table; margin: 0 auto;" *ngIf="displayInfos.input">
+            </app-timer-input>
+        </td>
+    </tr>
+    <tr style="height: 15%;">
+        <td>
+            <button mat-button aria-label="start button" class="btn-center-vertial btn-icon" *ngIf="displayInfos.start"
+                (click)="start.emit()">
+                <mat-icon>play_arrow</mat-icon>
+                Start
+            </button>
+            <button mat-button aria-label="pause button" class="btn-center-vertial btn-icon" *ngIf="displayInfos.pause"
+                (click)="pause.emit()">
+                <mat-icon>pause</mat-icon>
+                Pause
+            </button>
+            <button mat-button aria-label="reset button" class="btn-center-vertial btn-icon"
+                *ngIf="displayInfos.lowerReset" (click)="reset.emit()">
+                <mat-icon>stop</mat-icon>
+                Reset
+            </button>
+        </td>
+    </tr>
+    <tr style="height: 20%;"></tr>
+</table>
 
-    <table style="width: 100%; height: 100%;">
-        <tr style="height: 20%;"></tr>
-        <tr style="height: 15%;">
-            <td>
-                <button mat-button aria-label="reset button" class="btn-center-vertial" *ngIf="displayInfos.upperReset"
-                    (click)="reset.emit()">
-                    Reset
-                </button>
-            </td>
-        </tr>
-        <tr style="height: 20%;">
-            <td>
-                <app-timer-input #timerInput style="display: table; margin: 0 auto;" *ngIf="displayInfos.input"></app-timer-input>
-            </td>
-        </tr>
-        <tr style="height: 15%;">
-            <td>
-                <button mat-button aria-label="start button" class="btn-center-vertial btn-icon"
-                    *ngIf="displayInfos.start" (click)="start.emit()">
-                    <mat-icon>play_arrow</mat-icon>
-                    Start
-                </button>
-                <button mat-button aria-label="pause button" class="btn-center-vertial btn-icon"
-                    *ngIf="displayInfos.pause" (click)="pause.emit()">
-                    <mat-icon>pause</mat-icon>
-                    Pause
-                </button>
-                <button mat-button aria-label="reset button" class="btn-center-vertial btn-icon"
-                    *ngIf="displayInfos.lowerReset" (click)="reset.emit()">
-                    <mat-icon>stop</mat-icon>
-                    Reset
-                </button>
-            </td>
-        </tr>
-        <tr style="height: 20%;"></tr>
-    </table>
-
-    <app-timer-spinner width="300px" height="300px" [text]="spinnerText" [flashText]="displayInfos.textFlashing"
-        [percentage]="spinnerPercentage"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-    </app-timer-spinner>
+<app-timer-spinner width="300px" height="300px" [text]="spinnerText" [flashText]="displayInfos.textFlashing"
+    [percentage]="spinnerPercentage"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+</app-timer-spinner>
 
 <!--
 <button mat-raised-button color="primary" (click)="timer.add()">add one second</button>
-<button mat-raised-button color="primary" (click)="deleteTimer()">Delete</button>
 -->

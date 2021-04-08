@@ -6,9 +6,9 @@
     </div>
 
     <div style="display: table-cell; vertical-align: middle;">
-        <ul style="margin: 0 auto;" [style.visibility]="showSlick?'':'hidden'">
-            <li *ngFor="let tabItem of tabItems; index as i" (click)="switchToItem(tabItem)"
-                [class]="currentIndex===i?'active':''">
+        <ul style="margin: 0 auto;" [style.visibility]="showSlicks ? '' : 'hidden'">
+            <li *ngFor="let tabItem of tabItems; index as i" (click)="switchToIndex(i)"
+                [class]="currentIndex===i?'active':''" [style.visibility]="tabItem.showSlick ? '' : 'hidden'">
             </li>
         </ul>
     </div>

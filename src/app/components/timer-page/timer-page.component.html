@@ -1,35 +1,27 @@
 <div style="padding: 24px;">
     <mat-card style="max-width: 540px; margin: 0px auto;">
 
-        <app-animation-container-group #containerGroup [showSlick]="false">
-            <app-animation-container #timerAddingContainer [easeIn]="true">
-                <app-animation-container-group [showSlick]="false">
-                    <app-animation-container>
-                        <app-timer #inputComponent></app-timer>
-                    </app-animation-container>
-                </app-animation-container-group>
+        <app-animation-container-group #containerGroup [showSlicks]="getVisibilities().showSlicks">
+            <app-animation-container [showSlick]="false">
+                <app-timer #inputComponent></app-timer>
             </app-animation-container>
-            <app-animation-container #timersContainer [easeIn]="true">
-                <app-animation-container-group #timersContainerGroup>
-                    <app-animation-container *ngFor="let timer of timers">
-                        <app-timer [displayInfos]="getTimerInfos(timer.state)" [spinnerText]="timer.strRemainingTime"
-                            [spinnerPercentage]="timer.percentage" (start)="timer.resume()" (pause)="timer.pause()"
-                            (reset)="timer.reset()">
-                        </app-timer>
-                    </app-animation-container>
-                </app-animation-container-group>
+            <app-animation-container *ngFor="let timer of timers">
+                <app-timer [displayInfos]="getTimerInfos(timer.state)" [spinnerText]="timer.strRemainingTime"
+                    [spinnerPercentage]="timer.percentage" (start)="timer.resume()" (pause)="timer.pause()"
+                    (reset)="timer.reset()">
+                </app-timer>
             </app-animation-container>
         </app-animation-container-group>
 
         <div style="display: flex;">
-            <button mat-raised-button color="primary" *ngIf="getBtnVisibility().cancel"
-                (click)="showContainerPage(2)">Cancel</button>
-            <button mat-raised-button color="primary" *ngIf="getBtnVisibility().delete"
+            <button mat-raised-button color="primary" *ngIf="getVisibilities().cancel"
+                (click)="cancalAddingTimer()">Cancel</button>
+            <button mat-raised-button color="primary" *ngIf="getVisibilities().delete"
                 (click)="deleteTimer()">Delete</button>
             <div style="flex-grow: 1;"></div>
-            <button mat-raised-button color="primary" *ngIf="getBtnVisibility().add" (click)="addTimer()">Add</button>
-            <button mat-raised-button color="primary" *ngIf="getBtnVisibility().addTimer"
-                (click)="showContainerPage(1)">Add
+            <button mat-raised-button color="primary" *ngIf="getVisibilities().add" (click)="addTimer()">Add</button>
+            <button mat-raised-button color="primary" *ngIf="getVisibilities().addTimer"
+                (click)="switchToAddingTimer()">Add
                 Timer</button>
         </div>
 
