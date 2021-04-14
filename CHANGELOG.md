@@ -2,6 +2,8 @@
 # TODO
 
 - timer
+  - timers throttling by browser
+  - start timer immediately
   - unsubscribe
   - change sound
   - sound last until click stop button or other mechanism
@@ -10,6 +12,7 @@
   - alart in page
   - timer name
   - test sound location
+  - gesture
 - multiple timer
   - forbid button click while animating
   - style without button
