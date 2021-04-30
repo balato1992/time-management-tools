@@ -18,6 +18,7 @@
   - style without button
   - limit timer count
 
+- add github link
 - add instructions
 - timer series
 - style: dark mode
