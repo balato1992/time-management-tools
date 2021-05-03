@@ -12,9 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { TimerPageComponent } from './components/timer-page/timer-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { PageClockComponent } from './components/page-clock/page-clock.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { TimerSpinnerComponent } from './components/timer-spinner/timer-spinner.component';
 import { TimerInputComponent } from './components/timer-input/timer-input.component';
@@ -26,6 +28,7 @@ import { AnimationContainerGroupComponent } from './components/animation-contain
     AppComponent,
     TimerPageComponent,
     MainPageComponent,
+    PageClockComponent,
     TimerComponent,
     TimerSpinnerComponent,
     TimerInputComponent,
@@ -43,6 +46,7 @@ import { AnimationContainerGroupComponent } from './components/animation-contain
     MatCardModule,
     MatTabsModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

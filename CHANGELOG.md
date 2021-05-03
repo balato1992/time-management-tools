@@ -39,9 +39,16 @@
 - multiple timer
   - slicks
   - animations
+- clock page
+  - current time
+  - alarm on the hour
 
 # CHANGE LOG
 
+- 20210503
+  1. add web.config to route properly at Azure servers(IIS Server)
+     - [angular-2-azure-deploy-refresh](https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
+  2. add clock page and a switch which determine 'alarm on the hour'
 - 20210408
   1. animation-container.component: improve switching mechanism and animation
   2. style: add _variables.scss to store variable
