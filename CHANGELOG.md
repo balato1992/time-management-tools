@@ -42,13 +42,17 @@
 - clock page
   - current time
   - alarm on the hour
+  - worker
 
 # CHANGE LOG
+
+https://blog.kevinyang.net/2019/06/07/angular-web-worker/
 
 - 20210503
   1. add web.config to route properly at Azure servers(IIS Server)
      - [angular-2-azure-deploy-refresh](https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
   2. add clock page and a switch which determine 'alarm on the hour'
+  3. use worker to avoid timers throttling by browser
 - 20210408
   1. animation-container.component: improve switching mechanism and animation
   2. style: add _variables.scss to store variable

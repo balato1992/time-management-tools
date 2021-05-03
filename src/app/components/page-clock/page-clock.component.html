@@ -1,12 +1,15 @@
 <div style="padding: 24px;">
     <mat-card style="max-width: 540px; margin: 0px auto;">
         <div>
-            Current time: {{time.toLocaleString()}}
+            Current time: {{displayTime.toLocaleString()}}
         </div>
 
         <div>
-
             <mat-slide-toggle [(ngModel)]="isAlarmOnTheHour">Alarm On The Hour</mat-slide-toggle>
+        </div>
+
+        <div style="display: none;">
+            <input type="number" [(ngModel)]="testMin">
         </div>
     </mat-card>
 </div>
